@@ -24,11 +24,12 @@ class PostService {
   }
 
   // Create Post
-  static insertPost(user, rating, text) {
+  static insertPost(user, rating, title, text) {
     const likes = 0;
     return axios.post(url, {
       user,
       rating,
+      title,
       text,
       likes,
     });

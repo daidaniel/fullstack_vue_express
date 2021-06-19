@@ -24,6 +24,15 @@
       />
       <label for="rating">/5</label>
       <br />
+      <label for="create-post">Title: </label>
+      <input
+        type="text"
+        id="input-title"
+        v-model="title"
+        placeholder=""
+        required
+      />
+      <br />
       <label for="create-post">Say Something: </label>
       <input
         type="text"
@@ -51,6 +60,7 @@
         }}
         <p>{{ post.user }}</p>
         <p>{{ post.rating }} / 5</p>
+        <p>{{ post.title }}</p>
         <p class="text">{{ post.text }}</p>
         <p>{{ post.likes }} Likes</p>
         <label for="like">Like:</label>
@@ -77,6 +87,7 @@ export default {
       error: "",
       user: "",
       rating: "",
+      title: "",
       text: "",
       avgRating: 0,
       numPosts: 0,
@@ -93,17 +104,18 @@ export default {
   methods: {
     async createPost() {
       console.log(this.rating);
-      await PostService.insertPost(this.user, this.rating, this.text);
+      await PostService.insertPost(
+        this.user,
+        this.rating,
+        this.title,
+        this.text
+      );
       this.posts = await PostService.getPosts();
-      this.avgRating = 0;
-      this.numPosts = 0;
       this.calcAvgRating();
     },
     async deletePost(id) {
       await PostService.deletePost(id);
       this.posts = await PostService.getPosts();
-      this.avgRating = 0;
-      this.numPosts = 0;
       this.calcAvgRating();
     },
     async likePost(id, likes) {
@@ -112,12 +124,16 @@ export default {
       this.posts = await PostService.getPosts();
     },
     async calcAvgRating() {
+      this.avgRating = 0;
+      this.numPosts = 0;
       this.posts.forEach((post) => {
         this.avgRating += parseInt(post.rating);
         this.numPosts++;
       });
-      this.avgRating /= this.numPosts;
-      this.avgRating = Math.round(this.avgRating * 10) / 10;
+      if (this.numPosts > 0) {
+        this.avgRating /= this.numPosts;
+        this.avgRating = Math.round(this.avgRating * 10) / 10;
+      }
     },
   },
 };

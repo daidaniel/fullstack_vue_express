@@ -15,6 +15,7 @@ router.post("/", async (req, res) => {
   await posts.insertOne({
     user: req.body.user,
     rating: req.body.rating,
+    title: req.body.title,
     text: req.body.text,
     likes: req.body.likes,
     createdAt: new Date(),
