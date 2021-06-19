@@ -5,7 +5,7 @@ const url = "api/posts/";
 /* eslint-disable no-async-promise-executor */
 
 class PostService {
-  // get posts
+  // Get Posts
   static getPosts() {
     return new Promise(async (resolve, reject) => {
       try {
@@ -22,16 +22,27 @@ class PostService {
       }
     });
   }
-  //Create post
-  static insertPost(text) {
+
+  // Create Post
+  static insertPost(user, rating, text) {
+    const likes = 0;
     return axios.post(url, {
+      user,
+      rating,
       text,
+      likes,
     });
   }
 
-  //delete post
+  // Delete Post
   static deletePost(id) {
     return axios.delete(`${url}${id}`);
+  }
+
+  // List Post
+  static likePost(id, likes) {
+    const newLikes = likes + 1;
+    return axios.put(`${url}${id}`, { newLikes });
   }
 }
 

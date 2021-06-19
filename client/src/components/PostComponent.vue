@@ -1,23 +1,47 @@
 <template>
   <div class="container">
-    <h1>Latest Posts</h1>
-    <div class="create-post">
-      <label for="create-post">Say Something...</label>
-      <input type="text" id="create-post" v-model="text" placeholder="">
-      <button v-on:click="createPost">Post!</button>
-    </div>
-    <hr>
+    <h1>Reviews</h1>
+    <form class="create-post" v-on:submit="createPost">
+      <label for="user">User name: </label>
+      <input type="text" id="create-post" v-model="user" placeholder="" required />
+      <br>
+      <label for="rating">Rating: </label>
+      <input
+        type="number"
+        id="create-post"
+        v-model="rating"
+        placeholder=""
+        min="1"
+        max="5"
+        required
+      />
+      <label for="rating">/5</label>
+      <br>
+      <label for="create-post">Say Something: </label>
+      <input type="text" id="create-post" v-model="text" placeholder="" required />
+      <input type="submit" />
+    </form>
+    <hr />
     <p class="error" v-if="error">{{ error }}</p>
     <div class="posts-container">
-      <div class="post"
+      <div
+        class="post"
         v-for="(post, index) in posts"
         v-bind:item="post"
         v-bind:index="index"
         v-bind:key="post._id"
-        v-on:dblclick="deletePost(post._id)"
       >
-        {{ `${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getFullYear()}` }}
+        {{
+          `${
+            post.createdAt.getMonth() + 1
+          }/${post.createdAt.getDate()}/${post.createdAt.getFullYear()}`
+        }}
+        <p>{{ post.user }}</p>
+        <p>{{ post.rating }} / 5</p>
         <p class="text">{{ post.text }}</p>
+        <p>{{ post.likes }} Likes</p>
+        <button v-on:click="likePost(post._id, post.likes)">Like</button>
+        <button v-on:click="deletePost(post._id)">Delete</button>
       </div>
     </div>
   </div>
@@ -32,6 +56,8 @@ export default {
     return {
       posts: [],
       error: "",
+      user: "",
+      rating: "",
       text: "",
     };
   },
@@ -44,14 +70,18 @@ export default {
   },
   methods: {
     async createPost() {
-      await PostService.insertPost(this.text);
+      await PostService.insertPost(this.user, this.rating, this.text);
       this.posts = await PostService.getPosts();
     },
     async deletePost(id) {
       await PostService.deletePost(id);
       this.posts = await PostService.getPosts();
-    }
-  }
+    },
+    async likePost(id, likes) {
+      await PostService.likePost(id, likes);
+      this.posts = await PostService.getPosts();
+    },
+  },
 };
 </script>
 
