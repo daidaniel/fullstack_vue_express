@@ -39,9 +39,9 @@ class PostService {
     return axios.delete(`${url}${id}`);
   }
 
-  // List Post
-  static likePost(id, likes) {
-    const newLikes = likes + 1;
+  // Like (or Unlike) Post
+  static likePost(id, likes, isChecked) {
+    const newLikes = (isChecked ? likes + 1 : likes - 1);
     return axios.put(`${url}${id}`, { newLikes });
   }
 }

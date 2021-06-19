@@ -3,12 +3,12 @@
     <h1>Reviews</h1>
     <form class="create-post" v-on:submit="createPost">
       <label for="user">User name: </label>
-      <input type="text" id="create-post" v-model="user" placeholder="" required />
+      <input type="text" id="input-user" v-model="user" placeholder="" required />
       <br>
       <label for="rating">Rating: </label>
       <input
         type="number"
-        id="create-post"
+        id="input-rating"
         v-model="rating"
         placeholder=""
         min="1"
@@ -18,7 +18,7 @@
       <label for="rating">/5</label>
       <br>
       <label for="create-post">Say Something: </label>
-      <input type="text" id="create-post" v-model="text" placeholder="" required />
+      <input type="text" id="input-text" v-model="text" placeholder="" required />
       <input type="submit" />
     </form>
     <hr />
@@ -40,7 +40,9 @@
         <p>{{ post.rating }} / 5</p>
         <p class="text">{{ post.text }}</p>
         <p>{{ post.likes }} Likes</p>
-        <button v-on:click="likePost(post._id, post.likes)">Like</button>
+        <label for="like">Like:</label>
+        <input type="checkbox" id="input-like" v-on:click="likePost(post._id, post.likes)" />
+        <br>
         <button v-on:click="deletePost(post._id)">Delete</button>
       </div>
     </div>
@@ -78,7 +80,8 @@ export default {
       this.posts = await PostService.getPosts();
     },
     async likePost(id, likes) {
-      await PostService.likePost(id, likes);
+      var isChecked = document.getElementById("input-like").checked;
+      await PostService.likePost(id, likes, isChecked);
       this.posts = await PostService.getPosts();
     },
   },
