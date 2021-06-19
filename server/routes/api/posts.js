@@ -36,7 +36,7 @@ router.put("/:id", async (req, res) => {
     { _id: new mongodb.ObjectID(req.params.id) },
     { $set: { likes: req.body.newLikes } }
   );
-  res.status(201).send();
+  res.status(200).send();
 });
 
 async function loadPostsCollection() {

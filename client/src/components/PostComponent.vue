@@ -1,24 +1,37 @@
 <template>
   <div class="container">
     <h1>Reviews</h1>
+    <p>{{ avgRating }} / 5</p>
     <form class="create-post" v-on:submit="createPost">
       <label for="user">User name: </label>
-      <input type="text" id="input-user" v-model="user" placeholder="" required />
-      <br>
+      <input
+        type="text"
+        id="input-user"
+        v-model="user"
+        placeholder=""
+        required
+      />
+      <br />
       <label for="rating">Rating: </label>
       <input
         type="number"
         id="input-rating"
-        v-model="rating"
+        v-model.number="rating"
         placeholder=""
         min="1"
         max="5"
         required
       />
       <label for="rating">/5</label>
-      <br>
+      <br />
       <label for="create-post">Say Something: </label>
-      <input type="text" id="input-text" v-model="text" placeholder="" required />
+      <input
+        type="text"
+        id="input-text"
+        v-model="text"
+        placeholder=""
+        required
+      />
       <input type="submit" />
     </form>
     <hr />
@@ -41,8 +54,12 @@
         <p class="text">{{ post.text }}</p>
         <p>{{ post.likes }} Likes</p>
         <label for="like">Like:</label>
-        <input type="checkbox" id="input-like" v-on:click="likePost(post._id, post.likes)" />
-        <br>
+        <input
+          type="checkbox"
+          id="input-like"
+          v-on:click="likePost(post._id, post.likes)"
+        />
+        <br />
         <button v-on:click="deletePost(post._id)">Delete</button>
       </div>
     </div>
@@ -61,28 +78,46 @@ export default {
       user: "",
       rating: "",
       text: "",
+      avgRating: 0,
+      numPosts: 0,
     };
   },
   async created() {
     try {
       this.posts = await PostService.getPosts();
+      this.calcAvgRating();
     } catch (err) {
       this.error = err.message;
     }
   },
   methods: {
     async createPost() {
+      console.log(this.rating);
       await PostService.insertPost(this.user, this.rating, this.text);
       this.posts = await PostService.getPosts();
+      this.avgRating = 0;
+      this.numPosts = 0;
+      this.calcAvgRating();
     },
     async deletePost(id) {
       await PostService.deletePost(id);
       this.posts = await PostService.getPosts();
+      this.avgRating = 0;
+      this.numPosts = 0;
+      this.calcAvgRating();
     },
     async likePost(id, likes) {
       var isChecked = document.getElementById("input-like").checked;
       await PostService.likePost(id, likes, isChecked);
       this.posts = await PostService.getPosts();
+    },
+    async calcAvgRating() {
+      this.posts.forEach((post) => {
+        this.avgRating += parseInt(post.rating);
+        this.numPosts++;
+      });
+      this.avgRating /= this.numPosts;
+      this.avgRating = Math.round(this.avgRating * 10) / 10;
     },
   },
 };
