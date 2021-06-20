@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import PostComponent from './components/PostComponent.vue'
+import PostComponent from "./components/PostComponent.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    PostComponent
-  }
-}
+    PostComponent,
+  },
+};
 </script>
 
 <style>

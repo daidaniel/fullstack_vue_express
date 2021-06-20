@@ -24,7 +24,7 @@ p.error {
   margin-bottom: 15px;
 }
 
-div.container > h1 {
+div.container>h1 {
   margin-bottom: 10px;
 }
 
@@ -33,7 +33,7 @@ div.product-container {
   text-align: left;
 }
 
-div.product-text > * {
+div.product-text>* {
   margin-bottom: 10px;
 }
 
@@ -52,7 +52,7 @@ img.product {
   object-fit: contain;
 }
 
-div.container > hr {
+div.container>hr {
   margin: 20px 0;
 }
 
@@ -64,7 +64,7 @@ div.write-review {
   text-align: left;
 }
 
-div.title > input {
+div.title>input {
   min-width: 0;
 }
 
@@ -73,7 +73,7 @@ form.create-post {
   flex-direction: column;
 }
 
-form.create-post > h3 {
+form.create-post>h3 {
   margin-bottom: 10px;
 }
 
@@ -90,15 +90,15 @@ label.rating {
   margin-left: 1em;
 }
 
-form.create-post > label {
+form.create-post>label {
   margin: 10px 0 5px;
 }
 
-form.create-post > input {
+form.create-post>input {
   max-width: 780px;
 }
 
-form.create-post > textarea {
+form.create-post>textarea {
   max-width: 780px;
   height: 5em;
 }
@@ -147,17 +147,17 @@ div.helpful {
   color: gray;
 }
 
-div.helpful > button {
+div.helpful>button {
   margin-left: .5em;
 }
 
-div.helpful > input {
+div.helpful>input {
   margin: 0 0 0 .5em;
   width: 16px;
   height: 16px;
 }
 
-div.helpful > h3 {
+div.helpful>h3 {
   margin: 0 5px;
 }
 
