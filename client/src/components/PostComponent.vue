@@ -32,14 +32,16 @@
         <div>
           <label for="user">Your name:&ensp;</label>
           <input
+            class="input-not-submit"
             type="text"
             id="input-user"
             v-model="user"
             placeholder=""
             required
           />
-          <label class="rating" for="rating">Rating:&ensp;</label>
+          <label for="rating">&emsp;Rating:&ensp;</label>
           <input
+            class="input-not-submit"
             type="number"
             id="input-rating"
             v-model.number="rating"
@@ -50,27 +52,25 @@
           />
           <label for="rating"> out of 5</label>
         </div>
+        <label for="title">Add a title:&ensp;</label>
+        <input
+          class="input-not-submit"
+          type="text"
+          id="input-title"
+          v-model="title"
+          placeholder=""
+          required
+        />
+        <label for="text">Your review:&ensp;</label>
+        <textarea
+          class="input-not-submit"
+          type="text"
+          id="input-text"
+          v-model="text"
+          placeholder=""
+          required
+        />
         <div>
-          <label for="create-post">Add a title:&ensp;</label>
-          <input
-            type="text"
-            id="input-title"
-            v-model="title"
-            placeholder=""
-            required
-          />
-        </div>
-        <div>
-          <label for="create-post">Your review:&ensp;</label>
-          <input
-            type="text"
-            id="input-text"
-            v-model="text"
-            placeholder=""
-            required
-          />
-        </div>
-        <div class="submit">
           <input type="submit" />
         </div>
       </form>
@@ -108,21 +108,25 @@
         </div>
         <div class="helpful">
           <p>
-            {{ post.likes }} {{ post.likes === 1 ? "person" : "people" }} found
+            {{ post.likes }} {{ post.likes == 1 ? "person" : "people" }} found
             this helpful.
           </p>
           <h3>|</h3>
-          <label for="like">Was this helpful? </label>
+          <label for="like">Was this helpful?</label>
           <button
             type="checkbox"
             id="input-like"
-            v-on:click="likePost(post._id, post.likes)"
-          >Yes</button>
+            v-on:click="likePost(post._id, post.likes, post.user)"
+          >
+            Yes
+          </button>
           <button
             type="checkbox"
             id="input-unlike"
-            v-on:click="unlikePost(post._id, post.likes)"
-          >No</button>
+            v-on:click="unlikePost(post._id, post.likes, post.user)"
+          >
+            No
+          </button>
         </div>
         <div class="delete">
           <button v-on:click="deletePost(post._id)">Delete</button>
@@ -175,22 +179,20 @@ export default {
       this.posts = await PostService.getPosts();
       this.calcAvgRating();
     },
-    async likePost(id, likes) {
-      if (this.likedPosts.has(id)) {
-        console.log("Post " + id + " already voted as helpful.")
-      } else {
+    async likePost(id, likes, user) {
+      if (!this.likedPosts.has(id)) {
         this.likedPosts.add(id);
         await PostService.likePost(id, likes);
         this.posts = await PostService.getPosts();
+        alert(user + "'s post was marked as helpful.");
       }
     },
-    async unlikePost(id, likes) {
+    async unlikePost(id, likes, user) {
       if (this.likedPosts.has(id)) {
         this.likedPosts.delete(id);
         await PostService.unlikePost(id, likes);
         this.posts = await PostService.getPosts();
-      } else {
-        console.log("Post " + id + " has not been voted as helpful.")
+        alert(user + "'s post is no longer marked as helpful.");
       }
     },
     async calcAvgRating() {
