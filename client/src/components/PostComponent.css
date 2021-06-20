@@ -1,0 +1,166 @@
+div.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+* {
+  font-family: 'Lato', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+}
+
+p.error {
+  border: 1px solid #ff5b5f;
+  border-radius: 10px;
+  background-color: #ffc5c1;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+div.container>h1 {
+  margin-bottom: 10px;
+}
+
+div.product-container {
+  display: flex;
+  text-align: left;
+}
+
+div.product-text>* {
+  margin-bottom: 10px;
+}
+
+div.product-img-container {
+  flex-shrink: 0;
+  border: 1px solid gray;
+  border-radius: 10px;
+  width: 400px;
+  padding: 20px;
+  margin-right: 20px;
+}
+
+img.product {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+div.container>hr {
+  margin: 20px 0;
+}
+
+div.write-review {
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 10px;
+  text-align: left;
+}
+
+div.title>input {
+  min-width: 0;
+}
+
+form.create-post {
+  display: flex;
+  flex-direction: column;
+}
+
+form.create-post>h3 {
+  margin-bottom: 10px;
+}
+
+input.input-not-submit {
+  font-size: 1em;
+}
+
+textarea.input-not-submit {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+label.rating {
+  margin-left: 1em;
+}
+
+form.create-post>label {
+  margin: 10px 0 5px;
+}
+
+form.create-post>input {
+  max-width: 780px;
+}
+
+form.create-post>textarea {
+  max-width: 780px;
+  height: 5em;
+}
+
+div.submit {
+  margin-bottom: 0px;
+}
+
+div.post {
+  position: relative;
+  border: 1px solid #5bd658;
+  border-radius: 10px;
+  background-color: #bcffb8;
+  margin-bottom: 15px;
+  padding: 10px;
+  text-align: left;
+}
+
+div.created-at {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px 15px 5px 15px;
+  background-color: darkgreen;
+  color: white;
+  font-size: 13px;
+}
+
+div.title {
+  display: flex;
+}
+
+div.userdate {
+  margin-top: 10px;
+  color: gray;
+}
+
+div.text {
+  margin-top: 10px;
+}
+
+div.helpful {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  color: gray;
+}
+
+div.helpful>button {
+  margin-left: .5em;
+}
+
+div.helpful>input {
+  margin: 0 0 0 .5em;
+  width: 16px;
+  height: 16px;
+}
+
+div.helpful>h3 {
+  margin: 0 5px;
+}
+
+div.delete {
+  margin-top: 10px;
+}

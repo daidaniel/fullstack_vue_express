@@ -1,19 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
     <PostComponent />
   </div>
 </template>
 
 <script>
-import PostComponent from './components/PostComponent.vue'
+import PostComponent from "./components/PostComponent.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    PostComponent
-  }
-}
+    PostComponent,
+  },
+};
 </script>
 
 <style>
