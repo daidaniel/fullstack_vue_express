@@ -113,11 +113,16 @@
           </p>
           <h3>|</h3>
           <label for="like">Was this helpful? </label>
-          <input
+          <button
             type="checkbox"
             id="input-like"
             v-on:click="likePost(post._id, post.likes)"
-          />
+          >Yes</button>
+          <button
+            type="checkbox"
+            id="input-unlike"
+            v-on:click="unlikePost(post._id, post.likes)"
+          >No</button>
         </div>
         <div class="delete">
           <button v-on:click="deletePost(post._id)">Delete</button>
@@ -140,6 +145,7 @@ export default {
       rating: "",
       title: "",
       text: "",
+      likedPosts: new Set(),
       avgRating: "",
       numPosts: "",
     };
@@ -170,9 +176,22 @@ export default {
       this.calcAvgRating();
     },
     async likePost(id, likes) {
-      var isChecked = document.getElementById("input-like").checked;
-      await PostService.likePost(id, likes, isChecked);
-      this.posts = await PostService.getPosts();
+      if (this.likedPosts.has(id)) {
+        console.log("Post " + id + " already voted as helpful.")
+      } else {
+        this.likedPosts.add(id);
+        await PostService.likePost(id, likes);
+        this.posts = await PostService.getPosts();
+      }
+    },
+    async unlikePost(id, likes) {
+      if (this.likedPosts.has(id)) {
+        this.likedPosts.delete(id);
+        await PostService.unlikePost(id, likes);
+        this.posts = await PostService.getPosts();
+      } else {
+        console.log("Post " + id + " has not been voted as helpful.")
+      }
     },
     async calcAvgRating() {
       this.avgRating = 0;

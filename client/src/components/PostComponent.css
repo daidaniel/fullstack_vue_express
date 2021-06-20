@@ -18,6 +18,7 @@ p {
 
 p.error {
   border: 1px solid #ff5b5f;
+  border-radius: 10px;
   background-color: #ffc5c1;
   padding: 10px;
   margin-bottom: 15px;

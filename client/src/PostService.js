@@ -40,9 +40,15 @@ class PostService {
     return axios.delete(`${url}${id}`);
   }
 
-  // Like (or Unlike) Post
-  static likePost(id, likes, isChecked) {
-    const newLikes = (isChecked ? likes + 1 : likes - 1);
+  // Like Post
+  static likePost(id, likes) {
+    const newLikes = likes + 1;
+    return axios.put(`${url}${id}`, { newLikes });
+  }
+
+  // Unlike Post
+  static unlikePost(id, likes) {
+    const newLikes = likes - 1;
     return axios.put(`${url}${id}`, { newLikes });
   }
 }
