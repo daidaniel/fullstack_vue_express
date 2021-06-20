@@ -3,6 +3,19 @@ div.container {
   margin: 0 auto;
 }
 
+* {
+  font-family: 'Lato', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+}
+
 p.error {
   border: 1px solid #ff5b5f;
   background-color: #ffc5c1;
@@ -13,9 +26,13 @@ p.error {
 div.post {
   position: relative;
   border: 1px solid #5bd658;
+  border-radius: 10px;
   background-color: #bcffb8;
-  padding: 10px 10px 30px 10px;
   margin-bottom: 15px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 div.created-at {
@@ -28,8 +45,36 @@ div.created-at {
   font-size: 13px;
 }
 
-p.text {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 0;
+div.title {
+  display: flex;
+}
+
+div.userdate {
+  margin-top: 10px;
+  color: gray;
+}
+
+div.text {
+  margin-top: 10px;
+}
+
+div.helpful {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  color: gray;
+}
+
+div.helpful > input {
+  margin: 0 0 0 .5em;
+  width: 16px;
+  height: 16px;
+}
+
+div.helpful > h3 {
+  margin: 0 5px;
+}
+
+div.delete {
+  margin-top: 10px;
 }

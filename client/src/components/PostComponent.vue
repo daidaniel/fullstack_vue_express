@@ -53,24 +53,38 @@
         v-bind:index="index"
         v-bind:key="post._id"
       >
-        {{
-          `${
-            post.createdAt.getMonth() + 1
-          }/${post.createdAt.getDate()}/${post.createdAt.getFullYear()}`
-        }}
-        <p>{{ post.user }}</p>
-        <p>{{ post.rating }} / 5</p>
-        <p>{{ post.title }}</p>
-        <p class="text">{{ post.text }}</p>
-        <p>{{ post.likes }} Likes</p>
-        <label for="like">Like:</label>
-        <input
-          type="checkbox"
-          id="input-like"
-          v-on:click="likePost(post._id, post.likes)"
-        />
-        <br />
-        <button v-on:click="deletePost(post._id)">Delete</button>
+        <div class="title">
+          <h3>{{ post.rating }} / 5 {{ post.title }}</h3>
+        </div>
+        <div class="userdate">
+          <p>
+            Reviewed by {{ post.user }} on
+            {{
+              `${
+                post.createdAt.getMonth() + 1
+              }/${post.createdAt.getDate()}/${post.createdAt.getFullYear()}`
+            }}
+          </p>
+        </div>
+        <div class="text">
+          <p>{{ post.text }}</p>
+        </div>
+        <div class="helpful">
+          <p>
+            {{ post.likes }} {{ post.likes === 1 ? "person" : "people" }} found
+            this helpful.
+          </p>
+          <h3>|</h3>
+          <label for="like">Was this helpful? </label>
+          <input
+            type="checkbox"
+            id="input-like"
+            v-on:click="likePost(post._id, post.likes)"
+          />
+        </div>
+        <div class="delete">
+          <button v-on:click="deletePost(post._id)">Delete</button>
+        </div>
       </div>
     </div>
   </div>
@@ -89,8 +103,8 @@ export default {
       rating: "",
       title: "",
       text: "",
-      avgRating: 0,
-      numPosts: 0,
+      avgRating: "",
+      numPosts: "",
     };
   },
   async created() {
@@ -127,7 +141,7 @@ export default {
       this.avgRating = 0;
       this.numPosts = 0;
       this.posts.forEach((post) => {
-        this.avgRating += parseInt(post.rating);
+        this.avgRating += post.rating;
         this.numPosts++;
       });
       if (this.numPosts > 0) {
