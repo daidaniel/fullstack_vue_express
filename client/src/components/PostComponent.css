@@ -23,6 +23,63 @@ p.error {
   margin-bottom: 15px;
 }
 
+div.container > h1 {
+  margin-bottom: 10px;
+}
+
+div.product-container {
+  display: flex;
+  text-align: left;
+}
+
+div.product-text > * {
+  margin-bottom: 10px;
+}
+
+div.product-img-container {
+  flex-shrink: 0;
+  border: 1px solid gray;
+  border-radius: 10px;
+  width: 400px;
+  padding: 20px;
+  margin-right: 20px;
+}
+
+img.product {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+div.container > hr {
+  margin: 20px 0;
+}
+
+div.write-review {
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 10px;
+  text-align: left;
+}
+
+form.create-post {
+  display: flex;
+  flex-direction: column;
+}
+
+form.create-post > * {
+  margin-bottom: 10px;
+}
+
+label.rating {
+  margin-left: 10px;
+}
+
+div.submit {
+  margin-bottom: 0px;
+}
+
 div.post {
   position: relative;
   border: 1px solid #5bd658;
@@ -30,8 +87,6 @@ div.post {
   background-color: #bcffb8;
   margin-bottom: 15px;
   padding: 10px;
-  display: flex;
-  flex-direction: column;
   text-align: left;
 }
 

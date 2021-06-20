@@ -1,49 +1,80 @@
 <template>
   <div class="container">
-    <h1>Reviews</h1>
-    <p>{{ avgRating }} / 5</p>
-    <form class="create-post" v-on:submit="createPost">
-      <label for="user">User name: </label>
-      <input
-        type="text"
-        id="input-user"
-        v-model="user"
-        placeholder=""
-        required
-      />
-      <br />
-      <label for="rating">Rating: </label>
-      <input
-        type="number"
-        id="input-rating"
-        v-model.number="rating"
-        placeholder=""
-        min="1"
-        max="5"
-        required
-      />
-      <label for="rating">/5</label>
-      <br />
-      <label for="create-post">Title: </label>
-      <input
-        type="text"
-        id="input-title"
-        v-model="title"
-        placeholder=""
-        required
-      />
-      <br />
-      <label for="create-post">Say Something: </label>
-      <input
-        type="text"
-        id="input-text"
-        v-model="text"
-        placeholder=""
-        required
-      />
-      <input type="submit" />
-    </form>
+    <div class="product-container">
+      <div class="product-img-container">
+        <img class="product" alt="switch" src="../assets/switch.jpg" />
+      </div>
+      <div class="product-text">
+        <h2>Nintendo Switch with Neon Blue and Neon Red Joy‑Con</h2>
+        <h3>
+          ★
+          {{ avgRating > 1.5 ? "★" : "☆" }}
+          {{ avgRating > 2.5 ? "★" : "☆" }}
+          {{ avgRating > 3.5 ? "★" : "☆" }}
+          {{ avgRating > 4.5 ? "★" : "☆" }}&ensp;{{ avgRating }} out of 5
+        </h3>
+        <p>
+          Introducing Nintendo Switch, the new home video game system from
+          Nintendo. In addition to providing single and multiplayer thrills at
+          home, the Nintendo Switch system can be taken on the go so players can
+          enjoy a full home console experience anytime, anywhere. The mobility
+          of a handheld is now added to the power of a home gaming system, with
+          unprecedented new play styles brought to life by the two new Joy-Con
+          controllers.
+        </p>
+      </div>
+    </div>
     <hr />
+    <h1>Reviews</h1>
+    <div class="write-review">
+      <form class="create-post" v-on:submit="createPost">
+        <h3>Write a review</h3>
+        <div>
+          <label for="user">Your name:&ensp;</label>
+          <input
+            type="text"
+            id="input-user"
+            v-model="user"
+            placeholder=""
+            required
+          />
+          <label class="rating" for="rating">Rating:&ensp;</label>
+          <input
+            type="number"
+            id="input-rating"
+            v-model.number="rating"
+            placeholder=""
+            min="1"
+            max="5"
+            required
+          />
+          <label for="rating"> out of 5</label>
+        </div>
+        <div>
+          <label for="create-post">Add a title:&ensp;</label>
+          <input
+            type="text"
+            id="input-title"
+            v-model="title"
+            placeholder=""
+            required
+          />
+        </div>
+        <div>
+          <label for="create-post">Your review:&ensp;</label>
+          <input
+            type="text"
+            id="input-text"
+            v-model="text"
+            placeholder=""
+            required
+          />
+        </div>
+        <div class="submit">
+          <input type="submit" />
+        </div>
+      </form>
+    </div>
     <p class="error" v-if="error">{{ error }}</p>
     <div class="posts-container">
       <div
@@ -54,7 +85,13 @@
         v-bind:key="post._id"
       >
         <div class="title">
-          <h3>{{ post.rating }} / 5 {{ post.title }}</h3>
+          <h3>
+            ★
+            {{ post.rating >= 2 ? "★" : "☆" }}
+            {{ post.rating >= 3 ? "★" : "☆" }}
+            {{ post.rating >= 4 ? "★" : "☆" }}
+            {{ post.rating == 5 ? "★" : "☆" }}&ensp;{{ post.title }}
+          </h3>
         </div>
         <div class="userdate">
           <p>
